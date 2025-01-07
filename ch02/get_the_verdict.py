@@ -2,7 +2,6 @@ import os
 import re
 import urllib.request
 
-
 url = ("https://raw.githubusercontent.com/rasbt/"
        "LLMs-from-scratch/main/ch02/01_main-chapter-code/"
        "the-verdict.txt"
@@ -16,7 +15,6 @@ if not os.path.exists(file_path):
 # load the the-verdict.txt file
 with open(file_path, "r", encoding="utf-8") as f:
     raw_text = f.read()
-
 
 # print("Total number of characters in the file:", len(raw_text))
 # print(raw_text[:99])
@@ -33,7 +31,11 @@ preprocessed = [item.strip() for item in preprocessed if item.strip()]
 
 # create a vocabulary token <-> number
 all_words = sorted(set(preprocessed))
-vocab = {token:integer for integer, token in enumerate(all_words)}
+# V2 tokenizer add special token "unk" and "endoftext"
+all_tokens = sorted(list(set(preprocessed)))
+all_tokens.extend(["<|endoftext|>", "<|unk|>", ])
+vocab = {token: integer for integer, token in enumerate(all_tokens)}
+# vocab = {token:integer for integer, token in enumerate(all_words)}
 # for i, item in enumerate(vocab.items()):
 #     print(item)
 #     if i > 50:
