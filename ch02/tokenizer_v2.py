@@ -1,6 +1,6 @@
 import re
 
-from ch02.get_the_verdict import vocab
+from get_the_verdict import vocab
 
 
 class SimpleTokenizerV2:
